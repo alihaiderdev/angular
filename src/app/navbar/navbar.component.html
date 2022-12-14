@@ -1,0 +1,54 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>
+      <a mat-list-item routerLink="">Angular</a>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink=""
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a mat-list-item routerLink="about" routerLinkActive="active">About</a>
+      <a mat-list-item routerLink="contact" routerLinkActive="active"
+        >Contact</a
+      >
+      <!-- [routerLinkActive]="'active'" -->
+      <a mat-list-item routerLink="users" routerLinkActive="active">Users</a>
+      <a mat-list-item routerLink="login" routerLinkActive="active">Login</a>
+      <a mat-list-item routerLink="comments" routerLinkActive="active"
+        >Comments</a
+      >
+      <a mat-list-item routerLink="employees" routerLinkActive="active"
+        >Employees</a
+      >
+      <a mat-list-item routerLinkActive="active">{{
+        onRouteChangeLoader | json
+      }}</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>angular-learning</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

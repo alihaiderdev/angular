@@ -1,0 +1,148 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "ali haider",
+      "email": "ali@gmail.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "name": "hasnain anwar",
+      "email": "hasnain@gmail.com",
+      "password": "password123"
+    },
+    {
+      "id": 3,
+      "name": "usman anwar",
+      "email": "usman@gmail.com",
+      "password": "password123"
+    },
+    {
+      "id": 4,
+      "name": "daniyal",
+      "email": "daniyal@gmail.com",
+      "password": "password123"
+    },
+    {
+      "id": 5,
+      "name": "bakar",
+      "email": "bakar@gmail.com",
+      "password": "password123"
+    },
+    {
+      "name": "Colorado Conrad",
+      "email": "hymewufuji@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 6
+    },
+    {
+      "name": "Autumn Hopper",
+      "email": "pypysus@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 7
+    },
+    {
+      "name": "Asher Wallace",
+      "email": "sycus@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 8
+    },
+    {
+      "name": "Zelenia Anthony",
+      "email": "jymucumody@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 9
+    },
+    {
+      "email": "xiqok@mailinator.com",
+      "name": "Walker Hendricks",
+      "password": "Pa$$w0rd!",
+      "id": 10
+    },
+    {
+      "email": "hada@mailinator.com",
+      "name": "ali",
+      "password": "Pa$$w0rd!",
+      "id": 11
+    },
+    {
+      "email": "tawihuwimi@mailinator.com",
+      "name": "usman",
+      "password": "Pa$$w0rd!",
+      "id": 12
+    },
+    {
+      "email": "dypimu@mailinator.com",
+      "name": "dani",
+      "password": "Pa$$w0rd!",
+      "id": 13
+    },
+    {
+      "email": "zyboqidam@mailinator.com",
+      "name": "kami",
+      "password": "Pa$$w0rd!",
+      "id": 14
+    },
+    {
+      "email": "ali@gmai.com",
+      "name": "ali",
+      "password": "password",
+      "id": 16
+    }
+  ],
+  "employees": [
+    {
+      "position": "Mean Stack Developer",
+      "name": "Ali Haider",
+      "department": "SDS",
+      "id": 1
+    },
+    {
+      "position": "Mern Stack Developer",
+      "name": "Daniyal Malik",
+      "department": "SDS",
+      "id": 2
+    },
+    {
+      "name": "Hasnain Anwar",
+      "position": "Full Stack Developer",
+      "department": "Concave",
+      "id": 3
+    },
+    {
+      "name": "Arsenio Moon",
+      "position": "Sequi ea eius molest",
+      "department": "SDS",
+      "id": 4
+    },
+    {
+      "name": "Ishmael Moon",
+      "position": "Rerum Nam magna sed ",
+      "department": "SDS",
+      "id": 5
+    },
+    {
+      "name": "Jamal Whitfield",
+      "position": "Ut doloribus ipsa e",
+      "department": "Concave",
+      "id": 6
+    },
+    {
+      "name": "McKenzie Stokes",
+      "position": "Eu lorem reiciendis ",
+      "department": "SDS",
+      "id": 7
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "name": "SDS"
+    },
+    {
+      "id": 2,
+      "name": "Concave"
+    }
+  ]
+}

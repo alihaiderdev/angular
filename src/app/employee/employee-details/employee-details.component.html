@@ -1,0 +1,13 @@
+<button
+  class="bg-indigo-600 text-white rounded-md px-4 py-2"
+  type="button"
+  (click)="goBack()"
+>
+  Back
+</button>
+<ng-container *ngIf="employee">
+  <h1>{{ employee.id }}</h1>
+  <h1>{{ employee.name }}</h1>
+  <h1>{{ employee.position }}</h1>
+  <h1>{{ employee.department }}</h1>
+</ng-container>

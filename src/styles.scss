@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+// importing bootstrap styles
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+// OR
+// simply add this path "./node_modules/bootstrap/dist/css/bootstrap.min.css" in angular.json styles array
+
+// importing tailwind styling
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

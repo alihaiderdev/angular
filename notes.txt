@@ -1,0 +1,242 @@
+these are the 8 lifecycle methods (hooks)
+1. ngOnChanges  ( we can only use ngOnChanges life hook in any component or directive where input decorator @Input() is available and get newValue)
+2. ngOnInit (get data from api response and set it to local class properties)
+3. ngDoCheck (we should not implemented ngOnChanges and ngDoCheck at the same time and avoid to use this hook as much as you can "detect any changes in our whole app on every event is occur inside an application this hook called" this hook is used very rarely)
+4. ngAfterContentInit
+5. ngAfterContentChecked (very rarely use)
+6. ngAfterViewInit (this lifecycle is called when everything in the component is initialize or everything loads in the DOM for example if we use any child component in our parent component the child components data and ui also loaded along with parent component, "if we set static to true in view child then we access the instance of our child component in ngOnInit method otherwise not but we access the instance in ngAfterViewInit hook in both case while static value is set to true or false default value is false")
+7. ngAfterViewChecked (very rarely use)
+8. ngOnDestroy
+
+
+content projection (to use content projection use ng-content tag from angular)
+ViewChild and ViewChildren decorators
+@ContentChild and @ContentChildren decorators
+
+
+// typescript:
+// lookup types:
+//   The dual of this is indexed access types, also called lookup types. Syntactically, they look exactly like an element access, but are written as types: ..
+export type Point = {
+    x: number,
+    y: number,
+}
+
+type X = Point['x'] // lookup types
+
+// keyof operator:
+//   The keyof operator takes an object type and produces a string or numeric literal union of its keys. The following type P is the same type as “x” | “y”:.
+type PointsKeys = keyof Point // keyof operator
+
+
+export const origin: Point = {
+    x: 0,
+    y: 0
+}
+
+// here typescyipt should through an error because origin never changes its always 0 so to do this we are doing the below thing 
+origin.x = 200
+
+export type ReadOnlyPoint1 = {
+    readonly x: number,
+    readonly y: number
+}
+
+// OR
+
+export type ReadOnlyPoint2 = Readonly<Point>
+
+// make our own Readonly using mapped types (typeof, lookup type and generics) in typescript
+export type ReadOnlyPoint3 = {
+    // [loop]: output // syntax
+    // readonly [key in "x", "y"]: number
+    readonly [key in keyof Point]: Point[key]
+}
+
+// Reuseable 
+export type ReadOnlyPoint4<T> = {
+    // [loop]: output // syntax
+    // readonly [key in "x", "y"]: number
+    readonly [key in keyof T]: T[key]
+}
+
+export type ReadOnlyPoint5 = ReadOnlyPoint4<Point>
+
+
+
+export const origin1: ReadOnlyPoint1 = {
+    x: 0,
+    y: 0
+}
+export const origin2: ReadOnlyPoint2 = {
+    x: 0,
+    y: 0
+}
+
+export const origin3: ReadOnlyPoint3 = {
+    x: 0,
+    y: 0
+}
+export const origin4: ReadOnlyPoint5 = {
+    x: 0,
+    y: 0
+}
+
+
+// now typescript throughing us error 
+origin1.x = 200
+origin2.x = 200
+origin3.x = 200
+origin4.x = 200
+
+Dependency injection (DI) in angular:
+1. Dependencies are service or objects needed by classes to perform some function.
+2. It’s a design pattern.
+3. Angular has built-in Dependency Injection support.
+
+DI providers:
++ Class based providers. we can make class based providers by using this command ng g s <service-name>
++ Value Providers. e.g: pass an object as a service
++ Factory.
+
+Creating and cosnuming services:
++ ng g s <service-name> when we use this command to create a service then this service is class base providers.
++ Injecting a service
++ Consuming a service
+
+@Injectable({
+  providedIn: 'root',
+  // providedIn: 'any',
+  // providedIn: 'platform'
+})
+
+
+ 
+
+Resolution Modifiers:
+by default angular check any service first in the current component Providers array then if it does not found then go to app module providers array and again if it doesn't find here then go to main.ts file platformBrowserDynamic but when you want to restrict angular to just check that service in component 
+then simply use @Self() decorator from angular core for this check users component @Self() private usersService: UsersService and @SkipSelf is completely its opposite it doesn't check in current component Providers array directly check it on the upper level for this check about component @SkipSelf() private usersData: UsersService and talk about @Optional decorator suppose we have a logger service it works is just log the message but just in development phase not in production phase then we can use this decorator for this check app component @Optional() private loggerService: LoggerService and for @Host() decorator check container component we use host decorator when we want to use all child component to use its parent component local instance and no look further up in the tree 
+
+Self
+SkipSelf
+Optional
+Host
+
+
+HttpClient and RxJs
+
+Introduction
+Setting Up HttpClient
+Using HttpClient Service
+Rxjs, Observables and streams
+http methods
+Rxjs Operators
+Http Interceptors
+APP_INITIALIZERS
+
+
+RXJS Operators:
+
+why we use rxjs operators?
+we use rxjs operators to modifies our streams as we know that after subscribing any stream we can not modifies it so to do this we use rxjs multiple operators for multiple scenarios in pipe method.
+
+
+ShareReplay (we can use ShareReplay where we have multiple calls on same api so its better to chache the response of first time call and then use it everywhere ShareReplay can do this cache thing for us)
+async pipe (why we use async pipe here because while using async pipe we don't need
+        to manually unsubscribe the subscription each and every time in
+        ngOnDestroy method for better performance and for avoid memory leaks
+        async pipe do it itself)
+CatchError here is another operators for handling errors 
+Map operator is use to modifies the stream data before subscribing it 
+
+and all the operators is used in pipe method 
+
+HTTP Interceptors is use for intercepting (adding some info in request and response at global level)
+APP_INITIALIZERS is used to loads the data before your app is initialze for example loading some app configurations its kind of service
+
+
+ActivatedRoute Service:
+
+Allow to read the router data.
+Allows access to snapshot data.
+Allows to access data from Route Config.
+
+SCAM: single component and module
+
+
++ Creating Feature Module
++ Configure routing at Feature module level
++ forChild used to configure the routes 
+
+ng g m rooms --flat=true --routing
+--flat=true flag is used when we dont want file inside a folder
+by using --routing flag routing file for room module is created along with room.module.ts file  
+
+
+Nested Routes and Child Route
+
++ Using child routes we can do nested routing
++ Allows to load child routes,
+
+nested routes: load another routes in existing route.
+
+ng build -c=prodcution make build for production mode.
+
+ng g m booking --routing --route=booking --module=app
+ng g m booking:
+    for creating a module without any routing file.
+
+ng g m booking --routing:
+    for creating a module with routing file.
+
+if you know that from the very starting you make a lazy loading module then use these command to done this all at once
+ng g m booking --routing --route=booking --module=app:
+    for creating a module with routing file and lazy load implementation with app routing as mentioned module name (app --module=app) automatically including all its class, template, styling and spec files.
+
+
+
+Guards / route guards
+canActivate
+canActivateChild its use to give permission to all child routes
+canDeactivate
+canLoad its only applicable for lazy loaded routes
+resolve guard is used to prefetching the data, usecase a screen is displaying a data that is fetgateching from some api and at start when we navigate for some time the screen is blank and when at data is get by api then it display so in this scenario we can use resolve guard to load the view with all the data (used where data will not change after loaded)
+
+
+RxJs Operators:
+mergeMap, switchMap, exhaustMap operator
+
+
+when we import url of both bootstrap css and angular material css in styles array of angular json file then we may face conflicts issues so to avoid this we can importing bootstrap styles in main or global styling file of our application
+
+Ctrl + p is the shortcut key for toggling or finding files in source panel of browser
+
+canDeactivate guard: is used for route base component (screens, pages) used in a scenario suppose we have a form in our login screen and user user some data in it and before submitting it, it is navigating to another screen si in this scenario we can use this guard to show a popup message say you have some pending changing are you really want to navigating to another screen
+
+
+Global Error Handling:
+Angular provide us a errorHandler name service we can extends this particular service and we can provide our own implementation
+
+testing:
+1. unit testing.
+2. integration testing / end to end testing. (we can https://www.cypress.io/ or https://playwright.dev/ or https://www.protractortest.org/#/ used for testing older angular applications)
+
+
+NgXs:
+There are 4 major concepts to NGXS:
+Store: Global state container, action dispatcher and selector
+Actions: Class describing the action to take and its associated metadata (its a place where we write our code for making api calls getting, posting, deleting or updating and the process or phenomena of calling action is called dispatching action / component sa state ma koi request karte hain action ki to use kehta hain action dispatch karna and state sa component ma deta lena ko Select kehta hain)
+State: Class definition of the state
+Selects: State slice selectors 
+
+suppose we have a screen where we list all employees and one screen for employee details at first time when we go to our employees list screen we call our getEmployees service and in this service we make an http call and get all the data from the server/api.
+component <=> service <=> server and when we go to any employee details and back to employees list screen then every time an http call is make that is not good for performance because we make multiple calls for same data 
+
+and when we use any state management like (NgXs):
+component <=> state <=> service <=> server component call to state, state go ot service and service go to server but this time we will not make http call only first time we call our api because when component go to state there is not data but when component second time go to state it already have all data so it wil not make another call to server.
+
+@Select is Observable where we access our state slice data
+@Selector(){
+    has logic to slice state;
+    suppose our global state has list of products and employees and which list we want to use or select (kitna or kis type ka data chahiya) is ka baad jo data slice ho jata hai uske us slice ka data access kar sakte hain num @Select ma as a Observable
+}

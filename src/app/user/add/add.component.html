@@ -1,0 +1,114 @@
+<h1>{{ user | json }}</h1>
+<h1>
+  {{ addUserForm.pristine | json }}
+  {{ addUserForm.dirty | json }}
+  {{ addUserForm.valid | json }}
+  {{ addUserForm.invalid | json }}
+  {{ addUserForm.value | json }}
+</h1>
+
+<!-- <h1>
+  the valid state goes to invalid and invalid to valid but once a form pristine
+  goes to dirty it will never go back to pristine until and unless we reset the
+  form
+</h1> -->
+
+<h1 *ngIf="successMessage" class="font-black text-xl text-green-600">
+  {{ successMessage }}
+</h1>
+
+<h1 *ngIf="errorMessage" class="font-black text-xl text-red-600">
+  {{ errorMessage }}
+</h1>
+<form #addUserForm="ngForm" (ngSubmit)="addUser(addUserForm)">
+  <div class="form-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter your name"
+      required
+      minlength="3"
+      maxlength="5"
+      name="name"
+      [(ngModel)]="user.name"
+      #name="ngModel"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+    />
+    <!-- [ngModelOptions]="{ updateOn: 'blur' }" this way we can change the default input value change listening -->
+    <!-- we use min and max with number type inputs  -->
+    <!-- <span>{{ name.errors | json }}</span> -->
+    <div
+      *ngIf="name.dirty && name.errors?.['required']"
+      class="alert alert-danger"
+    >
+      Name is required!
+    </div>
+    <h4 *ngIf="name.errors?.['minlength']" class="alert alert-danger">
+      Minimum length of name should be
+      {{name.errors?.['minlength']?.['requiredLength']}}!
+    </h4>
+  </div>
+
+  <div class="form-group mb-3">
+    <!-- type="email" -->
+    <!-- here email is work fine with type text but with type email its not working
+    as expected -->
+    <!-- {{ email.errors | json }} -->
+    <!-- <input
+      type="text"
+      class="form-control"
+      name="email"
+      placeholder="Enter your email"
+      [(ngModel)]="user.email"
+      required
+      #email="ngModel"
+      email
+      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+    />
+    <h4 *ngIf="email.errors?.['email']" class="alert alert-danger">
+      Please enter a valid email!
+    </h4> -->
+
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      placeholder="Enter your email"
+      [(ngModel)]="user.email"
+      required
+      #email="ngModel"
+    />
+    <div
+      *ngIf="email.dirty && email.errors?.['required']"
+      class="alert alert-danger"
+    >
+      Email is required!
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Enter your password"
+      [(ngModel)]="user.password"
+      required
+    />
+  </div>
+
+  <div>
+    <button
+      [disabled]="addUserForm.invalid"
+      class="btn btn-primary text-blue-600"
+      type="submit"
+    >
+      <span class="flex items-center">
+        Add
+        <ng-container *ngIf="isLoading">
+          <mat-spinner class="ml-2" diameter="20" strokeWidth="2"></mat-spinner>
+        </ng-container>
+      </span>
+    </button>
+  </div>
+</form>
